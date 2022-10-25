@@ -8,5 +8,7 @@ namespace Exam.BL
 {
     public interface IUsersService
     {
+        Task<bool> CreateUserAsync(string username, string password);
+
     }
 }
