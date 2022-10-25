@@ -19,9 +19,8 @@ namespace Exam.Domain
         public string PersonalCode { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public int ImageId { get; set; }
         public Image ProfilePic { get; set; }
-       
-        [ForeignKey("ResidentialInfo")]
         public int ResidentialInfoId { get; set; }
         public ResidentialInfo ResidentialInfo { get; set; }
 

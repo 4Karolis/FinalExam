@@ -65,6 +65,9 @@ namespace Exam.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,9 +92,8 @@ namespace Exam.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ResidentialInfoId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("PersonalInfos");
                 });
@@ -123,7 +125,8 @@ namespace Exam.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonalInfoId");
+                    b.HasIndex("PersonalInfoId")
+                        .IsUnique();
 
                     b.ToTable("ResidentialInfos");
                 });
@@ -157,8 +160,6 @@ namespace Exam.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonalInfoId");
-
                     b.ToTable("Users");
                 });
 
@@ -175,19 +176,11 @@ namespace Exam.DAL.Migrations
 
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
                 {
-                    b.HasOne("Exam.Domain.ResidentialInfo", "ResidentialInfo")
-                        .WithMany()
-                        .HasForeignKey("ResidentialInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Exam.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("PersonalInfo")
+                        .HasForeignKey("Exam.Domain.PersonalInfo", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ResidentialInfo");
 
                     b.Navigation("User");
                 });
@@ -195,19 +188,8 @@ namespace Exam.DAL.Migrations
             modelBuilder.Entity("Exam.Domain.ResidentialInfo", b =>
                 {
                     b.HasOne("Exam.Domain.PersonalInfo", "PersonalInfo")
-                        .WithMany()
-                        .HasForeignKey("PersonalInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PersonalInfo");
-                });
-
-            modelBuilder.Entity("Exam.Domain.User", b =>
-                {
-                    b.HasOne("Exam.Domain.PersonalInfo", "PersonalInfo")
-                        .WithMany()
-                        .HasForeignKey("PersonalInfoId")
+                        .WithOne("ResidentialInfo")
+                        .HasForeignKey("Exam.Domain.ResidentialInfo", "PersonalInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -217,6 +199,15 @@ namespace Exam.DAL.Migrations
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
                 {
                     b.Navigation("ProfilePic")
+                        .IsRequired();
+
+                    b.Navigation("ResidentialInfo")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Exam.Domain.User", b =>
+                {
+                    b.Navigation("PersonalInfo")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
