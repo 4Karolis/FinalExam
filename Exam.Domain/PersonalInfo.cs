@@ -9,9 +9,11 @@ namespace Exam.Domain
 {
     public class PersonalInfo
     {
-        [ForeignKey("User")]
-        public User User { get; set; }
+       
         public int Id { get; set; }
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User User { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string PersonalCode { get; set; }
@@ -20,6 +22,7 @@ namespace Exam.Domain
         public Image ProfilePic { get; set; }
        
         [ForeignKey("ResidentialInfo")]
+        public int ResidentialInfoId { get; set; }
         public ResidentialInfo ResidentialInfo { get; set; }
 
         public PersonalInfo()

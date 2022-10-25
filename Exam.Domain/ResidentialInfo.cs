@@ -9,9 +9,11 @@ namespace Exam.Domain
 {
     public class ResidentialInfo
     {
-        [ForeignKey("PersonalInfo")]
-        public PersonalInfo PersonalInfo { get; set; }
+       
         public int Id { get; set; }
+        [ForeignKey("PersonalInfo")]
+        public int PersonalInfoId { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
         public string City { get; set; }
         public string StreetName { get; set; }
         public int HouseNumber { get; set; }
