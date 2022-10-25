@@ -13,6 +13,7 @@ namespace Exam.Domain
         public string Password { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Role { get; set; }
+        public PersonalInfo PersonalInfo { get; set; } //FK
         // link to PersonalInfo
 
         public User()
