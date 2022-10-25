@@ -1,4 +1,4 @@
-﻿using Exam.Domain;
+﻿using FinalExam.DTOs;
 
 namespace FinalExam.DTOs
 {

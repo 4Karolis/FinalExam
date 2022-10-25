@@ -12,15 +12,15 @@ namespace Exam.Domain
        
         public int Id { get; set; }
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
         public User User { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string PersonalCode { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int ImageId { get; set; }
-        public Image ProfilePic { get; set; }
+        //public int ImageId { get; set; }
+        //public Image ProfilePic { get; set; }
         public int ResidentialInfoId { get; set; }
         public ResidentialInfo ResidentialInfo { get; set; }
 

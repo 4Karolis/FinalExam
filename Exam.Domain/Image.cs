@@ -13,9 +13,9 @@ namespace Exam.Domain
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public byte[] ImageBytes { get; set; }
-        [ForeignKey("PersonalInfo")]
-        public int PersonalInfoId { get; set; }
-        public PersonalInfo PersonalInfo { get; set; }
+        //[ForeignKey("PersonalInfo")]
+        //public int PersonalInfoId { get; set; }
+        //public PersonalInfo PersonalInfo { get; set; }
         public Image()
         {
 

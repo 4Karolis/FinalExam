@@ -12,7 +12,7 @@ namespace Exam.Domain
        
         public int Id { get; set; }
         [ForeignKey("PersonalInfo")]
-        public int PersonalInfoId { get; set; }
+        //public int PersonalInfoId { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
         public string City { get; set; }
         public string StreetName { get; set; }

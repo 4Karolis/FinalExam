@@ -20,7 +20,7 @@ namespace FinalExam.Controllers
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(SignupDto signupDto)
         {
-            var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password);
+            var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo);
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User with this username already exists" });
         }

@@ -1,5 +1,6 @@
 ﻿using Exam.DAL;
 using Exam.Domain;
+using FinalExam.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Exam.BL
         {
             _dbrepository = dbrepository;
         }
-        public async Task<bool> CreateUserAsync(string username, string password)
+        public async Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo)
         {
             var existingUser = await _dbrepository.GetUserByUsernameAsync(username);
             if (existingUser != null)
@@ -30,7 +31,21 @@ namespace Exam.BL
                 PasswordHash = hash,
                 PasswordSalt = salt,
                 Role = "user",
-                PersonalInfo = new PersonalInfo()
+                PersonalInfo = new PersonalInfo
+                {
+                    Name = personalInfo.Name,
+                    Lastname = personalInfo.Lastname,
+                    PersonalCode = personalInfo.PersonalCode,
+                    Phone = personalInfo.Phone,
+                    Email = personalInfo.Email,
+                    ResidentialInfo = new ResidentialInfo
+                    {
+                        City = residentialInfo.City,
+                        StreetName = residentialInfo.StreetName,
+                        HouseNumber = residentialInfo.HouseNumber,
+                        ApartmentNumber = residentialInfo.ApartmentNumber
+                    }
+                },
             };
             await _dbrepository.InsertAccountAsync(newUser);
             await _dbrepository.SaveChangesAsync();
