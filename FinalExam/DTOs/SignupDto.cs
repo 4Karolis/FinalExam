@@ -6,5 +6,6 @@ namespace FinalExam.DTOs
     {
         public string Username { get; set; }
         public string Password { get; set; }
+        public PersonalInfoDto PersonalInfo { get; set; }
     }
 }
