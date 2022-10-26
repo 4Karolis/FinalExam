@@ -28,7 +28,7 @@ namespace Exam.BL
             var newUser = new User
             {
                 Username = username,
-                Password = password,
+                //Password = password,
                 PasswordHash = hash,
                 PasswordSalt = salt,
                 Role = "user",
