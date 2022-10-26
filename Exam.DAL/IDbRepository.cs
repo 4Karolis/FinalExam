@@ -12,6 +12,8 @@ namespace Exam.DAL
         Task<User?> GetUserByUsernameAsync(string username);
         Task InsertAccountAsync(User user);
         Task SaveChangesAsync();
+        Task AddImageAsync(Image image);
+        Task<Image> GetImageAsync(int id);
 
     }
 }
