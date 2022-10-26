@@ -36,5 +36,10 @@ namespace Exam.DAL
         {
             return await _dbContext.Images.FirstOrDefaultAsync(i => i.Id == id);
         }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
+        }
     }
 }

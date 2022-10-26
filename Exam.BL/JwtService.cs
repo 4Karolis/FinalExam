@@ -23,6 +23,7 @@ namespace Exam.BL
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim("sub", user.Id.ToString())
             };

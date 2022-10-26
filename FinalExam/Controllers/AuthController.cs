@@ -1,7 +1,9 @@
 ﻿using DTOs;
 using Exam.BL;
+using Exam.Domain;
 using FinalExam.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinalExam.Controllers
 {
@@ -49,6 +51,13 @@ namespace FinalExam.Controllers
             {
                 return BadRequest(new { ErrorMessage = "Login failed" });
             }
+        }
+        [HttpGet("GetUser")]
+        public async Task<User> GetUserAsync()
+        {
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
+            return await _userService.GetUserByIdAsync(userId);
+
         }
     }
 }

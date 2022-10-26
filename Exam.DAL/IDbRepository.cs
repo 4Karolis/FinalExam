@@ -14,6 +14,7 @@ namespace Exam.DAL
         Task SaveChangesAsync();
         Task<Image> AddImageAsync(Image image);
         Task<Image> GetImageAsync(int id);
+        Task<User> GetUserByIdAsync(int id);
 
     }
 }

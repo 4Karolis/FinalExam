@@ -94,5 +94,9 @@ namespace Exam.BL
 
             return (hash, salt);
         }
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _dbrepository.GetUserByIdAsync(id);
+        }
     }
 }
