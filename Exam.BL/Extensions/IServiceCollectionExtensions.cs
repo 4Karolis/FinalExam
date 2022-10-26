@@ -18,6 +18,7 @@ namespace Exam.BL.Extensions
             services.AddScoped<IPersonalInfoService, PersonalInfoService>();
             services.AddScoped<IResidentialInfoService, ResidentialInfoService>();
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IJwtService, JwtService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
