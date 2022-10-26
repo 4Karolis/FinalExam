@@ -53,10 +53,14 @@ namespace FinalExam.Controllers
             }
         }
         [HttpGet("GetUser")]
-        public async Task<User> GetUserAsync()
+        public async Task<IActionResult> GetUserAsync()
         {
-            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
-            return await _userService.GetUserByIdAsync(userId);
+            var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
+            var test = int.Parse(claims.FirstOrDefault(x => x.Type.Equals("sub")).Value);
+           
+            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            var user = await _userService.GetUserByIdAsync(test);
+            return Ok(user);
 
         }
     }
