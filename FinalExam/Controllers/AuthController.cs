@@ -35,5 +35,20 @@ namespace FinalExam.Controllers
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User with this username already exists" });
         }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var (loginSuccess, user) = await _userService.LoginAsync(loginDto.Username, loginDto.Password);
+            if (loginSuccess)
+            {
+                return Ok(new { Token = _jwtService.GetJwtToken(user) });
+                { }
+            }
+            else
+            {
+                return BadRequest(new { ErrorMessage = "Login failed" });
+            }
+        }
     }
 }
