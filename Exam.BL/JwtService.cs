@@ -23,14 +23,15 @@ namespace Exam.BL
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Role),
                 new Claim("sub", user.Id.ToString())
             };
-            var secret = _configuration.GetSection("Jwt:Key").Value;
+            var secret = _configuration.GetSection("JWT:Key").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
-                issuer: _configuration.GetSection("Jwt:Issuer").Value,
-                audience: _configuration.GetSection("Jwt:Audience").Value,
+                issuer: _configuration.GetSection("JWT:Issuer").Value,
+                audience: _configuration.GetSection("JWT:Audience").Value,
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: cred);
