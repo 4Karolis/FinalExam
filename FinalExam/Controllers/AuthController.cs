@@ -21,14 +21,14 @@ namespace FinalExam.Controllers
         }
 
         [HttpPost("Signup")]
-        public async Task<IActionResult> Signup(SignupDto signupDto, [FromForm] ImageUploadDto imageDto)
+        public async Task<IActionResult> Signup(SignupDto signupDto/*, [FromForm] ImageUploadDto imageDto*/)
         {            
 
             using var memoryStream = new MemoryStream();
-            imageDto.ProfilePic.CopyTo(memoryStream);
+            signupDto.PersonalInfo.ProfilePic.CopyTo(memoryStream);
             var imageBytes = memoryStream.ToArray();
 
-            var savedImage = await _imageService.AddImageAsync(imageBytes, imageDto.ProfilePic.ContentType);
+            var savedImage = await _imageService.AddImageAsync(imageBytes, signupDto.PersonalInfo.ProfilePic.ContentType);
             
 
             var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo, savedImage);
