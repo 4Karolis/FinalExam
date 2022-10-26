@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exam.DAL.Migrations
 {
     [DbContext(typeof(ExamDbContext))]
-    [Migration("20221025183228_Initial")]
+    [Migration("20221026144246_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,13 +44,7 @@ namespace Exam.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("PersonalInfoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonalInfoId")
-                        .IsUnique();
 
                     b.ToTable("Images");
                 });
@@ -67,9 +61,6 @@ namespace Exam.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,9 +76,6 @@ namespace Exam.DAL.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ResidentialInfoId")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -145,12 +133,13 @@ namespace Exam.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordSalt")
+                    b.Property<byte[]>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("PersonalInfoId")
-                        .HasColumnType("int");
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -163,17 +152,6 @@ namespace Exam.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Exam.Domain.Image", b =>
-                {
-                    b.HasOne("Exam.Domain.PersonalInfo", "PersonalInfo")
-                        .WithOne("ProfilePic")
-                        .HasForeignKey("Exam.Domain.Image", "PersonalInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PersonalInfo");
                 });
 
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
@@ -200,9 +178,6 @@ namespace Exam.DAL.Migrations
 
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
                 {
-                    b.Navigation("ProfilePic")
-                        .IsRequired();
-
                     b.Navigation("ResidentialInfo")
                         .IsRequired();
                 });

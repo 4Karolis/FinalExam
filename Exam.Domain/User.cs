@@ -15,8 +15,9 @@ namespace Exam.Domain
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Role { get; set; }
+        //[ForeignKey("PersonalInfo")]
         //public int PersonalInfoId { get; set; }
-        public PersonalInfo PersonalInfo { get; set; } //FK
+        public PersonalInfo PersonalInfo { get; set; } 
 
         // link to PersonalInfo
 
