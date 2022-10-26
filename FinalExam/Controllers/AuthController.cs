@@ -57,9 +57,12 @@ namespace FinalExam.Controllers
         {
             var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
             var test = int.Parse(claims.FirstOrDefault(x => x.Type.Equals("sub")).Value);
-           
+            var test2 = int.Parse(claims?.FirstOrDefault(x => x.Type.Equals("sub", StringComparison.OrdinalIgnoreCase))?.Value);
+
             //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-            var user = await _userService.GetUserByIdAsync(test);
+            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == "sub").Value);
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
+            var user = await _userService.GetUserByIdAsync(test2);
             return Ok(user);
 
         }
