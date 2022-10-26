@@ -18,7 +18,7 @@ namespace Exam.BL
         {
             _dbrepository = dbrepository;
         }
-        public async Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo, ImageUploadDto imageDto)
+        public async Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo, Image image)
         {
             var existingUser = await _dbrepository.GetUserByUsernameAsync(username);
             if (existingUser != null)
@@ -40,13 +40,13 @@ namespace Exam.BL
                     PersonalCode = personalInfo.PersonalCode,
                     Phone = personalInfo.Phone,
                     Email = personalInfo.Email,
-                    ProfilePic = new Image
-                    {
-                        //        public IFormFile ProfilePic { get; set; }
-                        ContentType = imageDto.ProfilePic.ContentType
-                        //ImageBytes = imageDto.ProfilePic.
+                    ProfilePic = image,
+                    //{
+                    //    //        public IFormFile ProfilePic { get; set; }
+                    //    ContentType = imageDto.ProfilePic.ContentType
+                    //    //ImageBytes = imageDto.ProfilePic.
 
-                    },
+                    //},
                     ResidentialInfo = new ResidentialInfo
                     {
                         City = residentialInfo.City,

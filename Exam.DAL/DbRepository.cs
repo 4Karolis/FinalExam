@@ -27,9 +27,10 @@ namespace Exam.DAL
         {
             await _dbContext.SaveChangesAsync();
         }
-        public async Task AddImageAsync(Image image)
+        public async Task<Image> AddImageAsync(Image image)
         {
             await _dbContext.Images.AddAsync(image);
+            return image;
         }
         public async Task<Image> GetImageAsync(int id)
         {

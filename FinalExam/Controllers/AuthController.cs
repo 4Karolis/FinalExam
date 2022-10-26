@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalExam.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IUsersService _userService;
@@ -23,6 +23,7 @@ namespace FinalExam.Controllers
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(SignupDto signupDto, [FromForm] ImageUploadDto imageDto)
         {            
+
             using var memoryStream = new MemoryStream();
             imageDto.ProfilePic.CopyTo(memoryStream);
             var imageBytes = memoryStream.ToArray();
@@ -30,7 +31,7 @@ namespace FinalExam.Controllers
             var savedImage = await _imageService.AddImageAsync(imageBytes, imageDto.ProfilePic.ContentType);
             
 
-            var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo, imageDto);
+            var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo, savedImage);
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User with this username already exists" });
         }

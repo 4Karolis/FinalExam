@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Exam.Domain;
 using FinalExam.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Exam.BL
 {
     public interface IUsersService
     {
-        Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo, ImageUploadDto imageDto);
+        Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo, Image image);
 
     }
 }
