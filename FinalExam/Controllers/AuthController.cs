@@ -92,5 +92,11 @@ namespace FinalExam.Controllers
             };
             return Ok(infoToReturn);
         }
+        [HttpGet("GetImageByIdTest")]
+        public async Task<IActionResult> GetImage(int imageId)
+        {
+            var image =  await _imageService.GetImageAsync(imageId);
+            return File(image.ImageBytes, image.ContentType);
+        }
     }
 }
