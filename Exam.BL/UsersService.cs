@@ -96,7 +96,7 @@ namespace Exam.BL
         }
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await _dbrepository.GetUserByIdAsync(id);
+            return await _dbrepository.Get2(id);
         }
     }
 }
