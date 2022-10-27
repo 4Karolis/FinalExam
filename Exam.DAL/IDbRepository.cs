@@ -17,6 +17,7 @@ namespace Exam.DAL
         Task<User> GetUserByIdAsync(int id);
         Task<PersonalInfo> GetPersonalInfoAsync(int userId);
         Task<ResidentialInfo> GetResidentialInfoAsync(int personalInfoId);
+        Task ChangeName(int userId, string name);
 
     }
 }

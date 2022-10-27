@@ -10,6 +10,7 @@ namespace Exam.BL
     public interface IPersonalInfoService
     {
          Task<PersonalInfo> GetPersonalInfoAsync(int userId);
+        Task ChangeName(int userId, string name);
 
     }
 }
