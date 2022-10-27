@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exam.DAL.Migrations
 {
     [DbContext(typeof(ExamDbContext))]
-    [Migration("20221026144246_Initial")]
+    [Migration("20221027171428_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,15 +36,18 @@ namespace Exam.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("ImageBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int?>("PersonalInfoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonalInfoId")
+                        .IsUnique()
+                        .HasFilter("[PersonalInfoId] IS NOT NULL");
 
                     b.ToTable("Images");
                 });
@@ -129,10 +132,6 @@ namespace Exam.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -152,6 +151,15 @@ namespace Exam.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Exam.Domain.Image", b =>
+                {
+                    b.HasOne("Exam.Domain.PersonalInfo", "PersonalInfo")
+                        .WithOne("ProfilePic")
+                        .HasForeignKey("Exam.Domain.Image", "PersonalInfoId");
+
+                    b.Navigation("PersonalInfo");
                 });
 
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
@@ -178,6 +186,9 @@ namespace Exam.DAL.Migrations
 
             modelBuilder.Entity("Exam.Domain.PersonalInfo", b =>
                 {
+                    b.Navigation("ProfilePic")
+                        .IsRequired();
+
                     b.Navigation("ResidentialInfo")
                         .IsRequired();
                 });

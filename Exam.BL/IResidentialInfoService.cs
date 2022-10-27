@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exam.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Exam.BL
 {
     public interface IResidentialInfoService
     {
+        Task<ResidentialInfo> GetResidentialInfoAsync(int personalInfoId);
     }
 }

@@ -15,12 +15,17 @@ namespace FinalExam.Controllers
         private readonly IUsersService _userService;
         private readonly IJwtService _jwtService;
         private readonly IImageService _imageService;
+        private readonly IPersonalInfoService _personalInfoService;
+        private readonly IResidentialInfoService _residentialInfoService;
 
-        public AuthController(IUsersService usersService, IJwtService jwtService, IImageService imageService)
+        public AuthController(IUsersService usersService, IJwtService jwtService, IImageService imageService,
+            IPersonalInfoService personalInfoService, IResidentialInfoService residentialInfoService)
         {
             _userService = usersService;
             _jwtService = jwtService;
             _imageService = imageService;
+            _personalInfoService = personalInfoService;
+            _residentialInfoService = residentialInfoService;
         }
 
         [HttpPost("Signup")]
@@ -67,6 +72,10 @@ namespace FinalExam.Controllers
         {
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             var user = await _userService.GetUserByIdAsync(userId);
+
+            //var personalInfo = await _personalInfoService.GetPersonalInfoAsync(user.PersonalInfoId);
+            //var residentialInfo = await _residentialInfoService.GetResidentialInfoAsync(personalInfo.ResidentialInfoId);
+
             var infoToReturn = new UserGetDto
             {
                 Username = user.Username,

@@ -41,5 +41,15 @@ namespace Exam.DAL
         {
             return await _dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
+
+        public async Task<PersonalInfo> GetPersonalInfoAsync(int userId)
+        {
+            return await _dbContext.PersonalInfos.FirstOrDefaultAsync(p => p.UserId == userId);
+        }
+        public async Task<ResidentialInfo> GetResidentialInfoAsync(int personalInfoId)
+        {
+            return await _dbContext.ResidentialInfos.FirstOrDefaultAsync(r => r.PersonalInfoId == personalInfoId);
+        }
+
     }
 }
