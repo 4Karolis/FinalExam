@@ -57,22 +57,10 @@ namespace FinalExam.Controllers
         [Authorize]
         public async Task<IActionResult> GetUserAsync()
         {
-            //var id = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "sub").Value);
-            //var id = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid).Value);
-            //var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
-            //var test = int.Parse(claims.FirstOrDefault(x => x.Type.Equals("sub")).Value);
-            //var test2 = int.Parse(claims?.FirstOrDefault(x => x.Type.Equals("sub", StringComparison.OrdinalIgnoreCase))?.Value);
-
-            //var nzn = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "sub").Value);
-            //var nzn2 = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid).Value);
-
-            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == "sub").Value);
-            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
             var id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             var user = await _userService.GetUserByIdAsync(id);
             return Ok(user);
-
         }
+
     }
 }
