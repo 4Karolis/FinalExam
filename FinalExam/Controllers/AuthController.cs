@@ -98,5 +98,11 @@ namespace FinalExam.Controllers
             var image =  await _imageService.GetImageAsync(imageId);
             return File(image.ImageBytes, image.ContentType);
         }
+        [HttpPut("ChangeNAME")]
+        public async Task ChangeName(string name)
+        {
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            _personalInfoService.ChangeName(userId, name);
+        }
     }
 }

@@ -51,6 +51,9 @@ namespace Exam.DAL
         {
             return await _dbContext.ResidentialInfos.FirstOrDefaultAsync(r => r.PersonalInfoId == personalInfoId);
         }
-
+        public async Task ChangeName(int userId, string name)
+        {
+            await 
+        }
     }
 }
