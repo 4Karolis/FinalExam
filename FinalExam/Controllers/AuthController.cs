@@ -2,6 +2,7 @@
 using Exam.BL;
 using Exam.Domain;
 using FinalExam.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -53,16 +54,21 @@ namespace FinalExam.Controllers
             }
         }
         [HttpGet("GetUser")]
-        public async Task<IActionResult> GetUserAsync()
+
+        public async Task<IActionResult> GetUserAsync(int id)
         {
-            var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
-            var test = int.Parse(claims.FirstOrDefault(x => x.Type.Equals("sub")).Value);
-            var test2 = int.Parse(claims?.FirstOrDefault(x => x.Type.Equals("sub", StringComparison.OrdinalIgnoreCase))?.Value);
+            //var id = int.Parse(HttpContext.User.Claims.Single(x => x.Type == "sub").Value);
+            //var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
+            //var test = int.Parse(claims.FirstOrDefault(x => x.Type.Equals("sub")).Value);
+            //var test2 = int.Parse(claims?.FirstOrDefault(x => x.Type.Equals("sub", StringComparison.OrdinalIgnoreCase))?.Value);
+
+            //var nzn = int.Parse(User.Claims.FirstOrDefault(x => x.Type == "sub").Value);
+            //var nzn2 = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Sid).Value);
 
             //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == "sub").Value);
-            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
-            var user = await _userService.GetUserByIdAsync(test2);
+            //var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Sid).Value);
+            var user = await _userService.GetUserByIdAsync(id);
             return Ok(user);
 
         }
