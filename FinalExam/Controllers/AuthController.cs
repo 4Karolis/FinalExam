@@ -146,7 +146,18 @@ namespace FinalExam.Controllers
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             await _personalInfoService.ChangePhoneAsync(userId, phoneNumber);
             return Ok();
-
+        }
+        [HttpPut("ChangeEmail")]
+        [Authorize]
+        public async Task<IActionResult> ChangeEmailAsync(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _personalInfoService.ChangeEmailAsync(userId, email);
+            return Ok();
         }
     }
 }

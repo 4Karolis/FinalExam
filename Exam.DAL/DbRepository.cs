@@ -73,5 +73,10 @@ namespace Exam.DAL
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Phone = phoneNumber;
         }
+        public async Task ChangeEmailAsync(int userId, string email)
+        {
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.Email = email;
+        }
     }
 }

@@ -14,6 +14,6 @@ namespace Exam.BL
         Task ChangeLastnameAsync(int userId, string lastname);
         Task ChangePersonalCodeAsync(int userId, string personalCode);
         Task ChangePhoneAsync(int userId, string phone);
-
+        Task ChangeEmailAsync(int userId, string email);
     }
 }

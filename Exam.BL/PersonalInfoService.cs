@@ -36,7 +36,11 @@ namespace Exam.BL
             await _dbRepository.ChangePhoneAsync(userId, phoneNumber);
             await _dbRepository.SaveChangesAsync();
         }
-
+        public async Task ChangeEmailAsync(int userId, string email)
+        {
+            await _dbRepository.ChangeEmailAsync(userId, email);
+            await _dbRepository.SaveChangesAsync();
+        }
         public async Task<PersonalInfo> GetPersonalInfoAsync(int userId)
         {
             return await _dbRepository.GetPersonalInfoAsync(userId);
