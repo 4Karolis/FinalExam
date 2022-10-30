@@ -159,5 +159,17 @@ namespace FinalExam.Controllers
             await _personalInfoService.ChangeEmailAsync(userId, email);
             return Ok();
         }
+        [HttpPut("ChangeCity")]
+        [Authorize]
+        public async Task<IActionResult> ChangeCityAsync(string city)
+        {
+            if (string.IsNullOrWhiteSpace(city))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _residentialInfoService.ChangeCityAsync(userId, city);
+            return Ok();
+        }
     }
 }

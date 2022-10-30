@@ -10,5 +10,7 @@ namespace Exam.BL
     public interface IResidentialInfoService
     {
         Task<ResidentialInfo> GetResidentialInfoAsync(int personalInfoId);
+        Task ChangeCityAsync(int userId, string city);
+
     }
 }

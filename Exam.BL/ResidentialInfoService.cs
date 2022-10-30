@@ -19,5 +19,10 @@ namespace Exam.BL
         {
             return await _dbRepository.GetResidentialInfoAsync(personalInfoId);
         }
+        public async Task ChangeCityAsync(int userId, string email)
+        {
+            await _dbRepository.ChangeCityAsync(userId, email);
+            await _dbRepository.SaveChangesAsync();
+        }
     }
 }

@@ -78,5 +78,27 @@ namespace Exam.DAL
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Email = email;
         }
+
+        public async Task ChangeCityAsync(int userId, string city)
+        {
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ResidentialInfo)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.ResidentialInfo.City = city;
+        }
+
+        public Task ChangeStreetAsync(int userId, string street)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ChangeHouseNumberAsync(int userId, string houseNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ChangeApartmentNumber(int userId, string apartmentNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
