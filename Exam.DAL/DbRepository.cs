@@ -39,7 +39,7 @@ namespace Exam.DAL
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await _dbContext.Users.Include(x => x.PersonalInfo).Include(x => x.PersonalInfo.ResidentialInfo).
+            return await _dbContext.Users.Include(x => x.PersonalInfo).Include(x => x.PersonalInfo.ProfilePic).Include(x => x.PersonalInfo.ResidentialInfo).
                 FirstOrDefaultAsync(u => u.Id == id);
         }
        

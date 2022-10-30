@@ -16,10 +16,11 @@ namespace DTOs
         public string PersonalCode { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        //Image
         public string City { get; set; }
         public string StreetName { get;set; }
         public string HouseNumber { get; set; }
         public string ApartmentNumber { get; set; }
+        //Image
+        public byte[] ProfilePic { get; set; }
     }
 }

@@ -87,8 +87,9 @@ namespace FinalExam.Controllers
                 Email = user.PersonalInfo.Email,
                 City = user.PersonalInfo.ResidentialInfo.City,
                 StreetName = user.PersonalInfo.ResidentialInfo.StreetName,
-                HouseNumber = user.PersonalInfo.ResidentialInfo.HouseNumber.ToString(),
-                ApartmentNumber = user.PersonalInfo.ResidentialInfo.ApartmentNumber.ToString()
+                HouseNumber = user.PersonalInfo.ResidentialInfo.HouseNumber,
+                ApartmentNumber = user.PersonalInfo.ResidentialInfo.ApartmentNumber,
+                ProfilePic = user.PersonalInfo.ProfilePic.ImageBytes
             };
             return Ok(infoToReturn);
         }
