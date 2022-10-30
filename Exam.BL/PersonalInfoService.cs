@@ -16,9 +16,9 @@ namespace Exam.BL
             _dbRepository = dbRepository;
         }
 
-        public async Task ChangeName(int userId, string name)
+        public async Task ChangeNameAsync(int userId, string name)
         {
-            await _dbRepository.ChangeName(userId, name);
+            await _dbRepository.ChangeNameAsync(userId, name);
             await _dbRepository.SaveChangesAsync();
         }
         public async Task ChangeLastnameAsync(int userId, string lastname)
@@ -29,6 +29,11 @@ namespace Exam.BL
         public async Task ChangePersonalCodeAsync(int userId, string personalCode)
         {
             await _dbRepository.ChangePersonalCodeAsync(userId, personalCode);
+            await _dbRepository.SaveChangesAsync();
+        }
+        public async Task ChangePhoneAsync(int userId, string phoneNumber)
+        {
+            await _dbRepository.ChangePhoneAsync(userId, phoneNumber);
             await _dbRepository.SaveChangesAsync();
         }
 

@@ -100,7 +100,7 @@ namespace FinalExam.Controllers
         }
         [HttpPut("ChangeNAME")]
         [Authorize]
-        public async Task<IActionResult> ChangeName(string name)
+        public async Task<IActionResult> ChangeNameAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -108,12 +108,12 @@ namespace FinalExam.Controllers
 
             }
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-            await _personalInfoService.ChangeName(userId, name);
+            await _personalInfoService.ChangeNameAsync(userId, name);
             return Ok();
         }
         [HttpPut("ChangeLastname")]
         [Authorize]
-        public async Task<IActionResult> ChanegLastname(string lastname)
+        public async Task<IActionResult> ChanegLastnameAsync(string lastname)
         {
             if (string.IsNullOrWhiteSpace(lastname))
             {
@@ -134,6 +134,19 @@ namespace FinalExam.Controllers
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             await _personalInfoService.ChangePersonalCodeAsync(userId, personalCode);
             return Ok();
+        }
+        [HttpPut("ChangePhone")]
+        [Authorize]
+        public async Task<IActionResult> ChangePhoneAsync(string phoneNumber)
+        {
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _personalInfoService.ChangePhoneAsync(userId, phoneNumber);
+            return Ok();
+
         }
     }
 }

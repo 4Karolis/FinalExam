@@ -51,7 +51,7 @@ namespace Exam.DAL
         {
             return await _dbContext.ResidentialInfos.FirstOrDefaultAsync(r => r.PersonalInfoId == personalInfoId);
         }
-        public async Task ChangeName(int userId, string name)
+        public async Task ChangeNameAsync(int userId, string name)
         {
             var existingUser = await _dbContext.Users.Include(x => x.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Name = name;
@@ -67,6 +67,11 @@ namespace Exam.DAL
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.PersonalCode = personalCode;
+        }
+        public async Task ChangePhoneAsync(int userId, string phoneNumber)
+        {
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.Phone = phoneNumber;
         }
     }
 }
