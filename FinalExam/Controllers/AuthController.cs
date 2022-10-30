@@ -99,10 +99,28 @@ namespace FinalExam.Controllers
             return File(image.ImageBytes, image.ContentType);
         }
         [HttpPut("ChangeNAME")]
+        [Authorize]
         public async Task<IActionResult> ChangeName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Info can't be null or whistespace");
+
+            }
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             await _personalInfoService.ChangeName(userId, name);
+            return Ok();
+        }
+        [HttpPut("ChangeLastname")]
+        [Authorize]
+        public async Task<IActionResult> ChanegLastname(string lastname)
+        {
+            if (string.IsNullOrWhiteSpace(lastname))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _personalInfoService.ChangeLastnameAsync(userId, lastname);
             return Ok();
         }
     }

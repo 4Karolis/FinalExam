@@ -58,5 +58,10 @@ namespace Exam.DAL
             //_dbContext.Users.Attach(user);
             //SaveChangesAsync();
         }
+        public async Task ChangeLastnameAsync(int userId, string lastname)
+        {
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.Lastname = lastname;
+        }
     }
 }
