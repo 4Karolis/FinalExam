@@ -63,5 +63,10 @@ namespace Exam.DAL
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Lastname = lastname;
         }
+        public async Task ChangePersonalCodeAsync(int userId, string personalCode)
+        {
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.PersonalCode = personalCode;
+        }
     }
 }

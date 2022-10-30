@@ -26,6 +26,11 @@ namespace Exam.BL
             await _dbRepository.ChangeLastnameAsync(userId, lastname);
             await _dbRepository.SaveChangesAsync();
         }
+        public async Task ChangePersonalCodeAsync(int userId, string personalCode)
+        {
+            await _dbRepository.ChangePersonalCodeAsync(userId, personalCode);
+            await _dbRepository.SaveChangesAsync();
+        }
 
         public async Task<PersonalInfo> GetPersonalInfoAsync(int userId)
         {

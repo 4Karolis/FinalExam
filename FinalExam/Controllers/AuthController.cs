@@ -123,5 +123,17 @@ namespace FinalExam.Controllers
             await _personalInfoService.ChangeLastnameAsync(userId, lastname);
             return Ok();
         }
+        [HttpPut("ChangePersonalCode")]
+        [Authorize]
+        public async Task<IActionResult> ChangePersonalCodeAsync(string personalCode)
+        {
+            if (string.IsNullOrWhiteSpace(personalCode))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _personalInfoService.ChangePersonalCodeAsync(userId, personalCode);
+            return Ok();
+        }
     }
 }
