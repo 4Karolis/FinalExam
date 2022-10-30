@@ -16,13 +16,14 @@ namespace Exam.BL
             _dbRepository = dbRepository;
         }
 
-        public Task ChangeName(int userId, string name)
+        public async Task ChangeName(int userId, string name)
         {
-            var user = await _dbRepository.GetUserByIdAsync(userId);
-            user.PersonalInfo.Name = name;
+            //var user = await _dbRepository.GetUserByIdAsync(userId);
 
-            _dbRepository.ChangeName(userId, name);
-            _dbRepository.SaveChangesAsync();
+            await _dbRepository.ChangeName(userId, name);
+            await _dbRepository.SaveChangesAsync();
+
+
         }
 
         public async Task<PersonalInfo> GetPersonalInfoAsync(int userId)

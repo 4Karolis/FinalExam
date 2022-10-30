@@ -99,10 +99,11 @@ namespace FinalExam.Controllers
             return File(image.ImageBytes, image.ContentType);
         }
         [HttpPut("ChangeNAME")]
-        public async Task ChangeName(string name)
+        public async Task<IActionResult> ChangeName(string name)
         {
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-            _personalInfoService.ChangeName(userId, name);
+            await _personalInfoService.ChangeName(userId, name);
+            return Ok();
         }
     }
 }
