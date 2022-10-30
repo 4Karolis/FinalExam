@@ -82,13 +82,15 @@ namespace Exam.DAL
         public async Task ChangeCityAsync(int userId, string city)
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ResidentialInfo)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            .FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.ResidentialInfo.City = city;
         }
 
-        public Task ChangeStreetAsync(int userId, string street)
+        public async Task ChangeStreetAsync(int userId, string street)
         {
-            throw new NotImplementedException();
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ResidentialInfo)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.ResidentialInfo.StreetName = street;
         }
 
         public Task ChangeHouseNumberAsync(int userId, string houseNumber)

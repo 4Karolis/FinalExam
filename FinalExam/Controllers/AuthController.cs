@@ -171,5 +171,17 @@ namespace FinalExam.Controllers
             await _residentialInfoService.ChangeCityAsync(userId, city);
             return Ok();
         }
+        [HttpPut("ChangeStreet")]
+        [Authorize]
+        public async Task<IActionResult> ChangeStreetAsync(string street)
+        {
+            if (string.IsNullOrWhiteSpace(street))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _residentialInfoService.ChangeStreetAsync(userId, street);
+            return Ok();
+        }
     }
 }
