@@ -195,5 +195,17 @@ namespace FinalExam.Controllers
             await _residentialInfoService.ChangeHouseNumberAsync(userId, houseNumber);
             return Ok();
         }
+        [HttpPut("ChangeApartmentNumber")]
+        [Authorize]
+        public async Task<IActionResult> ChangeApartmentNumberAsync(string apartmentNumber)
+        {
+            if (string.IsNullOrWhiteSpace(apartmentNumber))
+            {
+                return BadRequest("Info can't be null or whistespace");
+            }
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            await _residentialInfoService.ChangeApartmentNumberAsync(userId, apartmentNumber);
+            return Ok();
+        }
     }
 }
