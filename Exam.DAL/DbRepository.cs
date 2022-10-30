@@ -93,9 +93,11 @@ namespace Exam.DAL
             existingUser.PersonalInfo.ResidentialInfo.StreetName = street;
         }
 
-        public Task ChangeHouseNumberAsync(int userId, string houseNumber)
+        public async Task ChangeHouseNumberAsync(int userId, string houseNumber)
         {
-            throw new NotImplementedException();
+            var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ResidentialInfo)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+            existingUser.PersonalInfo.ResidentialInfo.HouseNumber = houseNumber;
         }
 
         public Task ChangeApartmentNumber(int userId, string apartmentNumber)

@@ -29,5 +29,10 @@ namespace Exam.BL
             await _dbRepository.ChangeStreetAsync(userId, street);
             await _dbRepository.SaveChangesAsync();
         }
+        public async Task ChangeHouseNumberAsync(int userId, string houseNumber)
+        {
+            await _dbRepository.ChangeHouseNumberAsync(userId, houseNumber);
+            await _dbRepository.SaveChangesAsync();
+        }
     }
 }
