@@ -58,14 +58,14 @@ namespace FinalExam.Controllers
                 return BadRequest(new { ErrorMessage = "Login failed" });
             }
         }
-        [HttpGet("GetUser")]
-        [Authorize]
-        public async Task<IActionResult> GetUserAsync()
-        {
-            var id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-            var user = await _userService.GetUserByIdAsync(id);
-            return Ok(user);
-        }
+        //[HttpGet("GetUser")]
+        //[Authorize]
+        //public async Task<IActionResult> GetUserAsync()
+        //{
+        //    var id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+        //    var user = await _userService.GetUserByIdAsync(id);
+        //    return Ok(user);
+        //}
         [HttpGet("GetUserInfo")]
         [Authorize]
         public async Task<IActionResult> GetUserInfo()
@@ -92,6 +92,12 @@ namespace FinalExam.Controllers
                 ProfilePic = user.PersonalInfo.ProfilePic.ImageBytes
             };
             return Ok(infoToReturn);
+        }
+        [HttpDelete("DeleteUser")]
+        [Authorize (Roles = "admin")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            return Ok();
         }
         [HttpGet("GetImageByIdTest")]
         public async Task<IActionResult> GetImage(int imageId)
