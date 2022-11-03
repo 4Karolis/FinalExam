@@ -1,5 +1,6 @@
 ﻿using Exam.DAL;
 using Exam.Domain;
+using FinalExam.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,6 +61,15 @@ namespace Exam.BL
             imageBytes = stream.ToArray();
 
             return imageBytes;
+        }
+
+        public async Task<byte[]> GetImageBytesAsync(SignupDto dto)
+        {
+            using var memoryStream = new MemoryStream();
+            dto.PersonalInfo.ProfilePic.CopyTo(memoryStream);
+            var imageBytes = memoryStream.ToArray();
+            var resizedImage = await ResizeImage(imageBytes, dto.PersonalInfo.ProfilePic.ContentType);
+            return resizedImage;
         }
     }
 }

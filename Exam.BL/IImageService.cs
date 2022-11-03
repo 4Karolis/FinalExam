@@ -1,4 +1,5 @@
 ﻿using Exam.Domain;
+using FinalExam.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Exam.BL
         Task<Image> AddImageAsync(byte[] imageBytes,  string contentType);
         Task<Image> GetImageAsync(int id);
         Task<byte[]> ResizeImage(byte[] imageBytes, string contentType);
+        Task<byte[]> GetImageBytesAsync(SignupDto dto);
     }
 }
