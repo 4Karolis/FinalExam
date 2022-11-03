@@ -30,8 +30,9 @@ namespace FinalExam.Controllers
             using var memoryStream = new MemoryStream();
             signupDto.PersonalInfo.ProfilePic.CopyTo(memoryStream);
             var imageBytes = memoryStream.ToArray();
+            var resizedImage = _imageService.ResizeImage(imageBytes, signupDto.PersonalInfo.ProfilePic.ContentType);
 
-            var savedImage = await _imageService.AddImageAsync(imageBytes, signupDto.PersonalInfo.ProfilePic.ContentType);
+            var savedImage = await _imageService.AddImageAsync(resizedImage, signupDto.PersonalInfo.ProfilePic.ContentType);
             
 
             var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo, savedImage);
