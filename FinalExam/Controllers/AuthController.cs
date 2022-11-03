@@ -29,7 +29,7 @@ namespace FinalExam.Controllers
         }
 
         [HttpPost("Signup")]
-        public async Task<IActionResult> Signup(SignupDto signupDto/*, [FromForm] ImageUploadDto imageDto*/)
+        public async Task<IActionResult> Signup(SignupDto signupDto)
         {            
 
             using var memoryStream = new MemoryStream();
@@ -58,23 +58,13 @@ namespace FinalExam.Controllers
                 return BadRequest(new { ErrorMessage = "Login failed" });
             }
         }
-        //[HttpGet("GetUser")]
-        //[Authorize]
-        //public async Task<IActionResult> GetUserAsync()
-        //{
-        //    var id = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
-        //    var user = await _userService.GetUserByIdAsync(id);
-        //    return Ok(user);
-        //}
+        
         [HttpGet("GetUserInfo")]
         [Authorize]
         public async Task<IActionResult> GetUserInfo()
         {
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             var user = await _userService.GetUserByIdAsync(userId);
-
-            //var personalInfo = await _personalInfoService.GetPersonalInfoAsync(user.PersonalInfoId);
-            //var residentialInfo = await _residentialInfoService.GetResidentialInfoAsync(personalInfo.ResidentialInfoId);
 
             var infoToReturn = new UserGetDto
             {
@@ -100,6 +90,7 @@ namespace FinalExam.Controllers
             return Ok();
         }
         [HttpGet("GetImageByIdTest")]
+        [Authorize]
         public async Task<IActionResult> GetImage(int imageId)
         {
             var image =  await _imageService.GetImageAsync(imageId);

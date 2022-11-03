@@ -54,9 +54,7 @@ namespace Exam.DAL
         public async Task ChangeNameAsync(int userId, string name)
         {
             var existingUser = await _dbContext.Users.Include(x => x.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
-            existingUser.PersonalInfo.Name = name;
-            //_dbContext.Users.Attach(user);
-            //SaveChangesAsync();
+            existingUser.PersonalInfo.Name = name;          
         }
         public async Task ChangeLastnameAsync(int userId, string lastname)
         {

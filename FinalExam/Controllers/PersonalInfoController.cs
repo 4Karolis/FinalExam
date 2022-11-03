@@ -7,9 +7,6 @@ namespace FinalExam.Controllers
     public class PersonalInfoController : ControllerBase
     {
         
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        
     }
 }

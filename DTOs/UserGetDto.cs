@@ -20,7 +20,6 @@ namespace DTOs
         public string StreetName { get;set; }
         public string HouseNumber { get; set; }
         public string ApartmentNumber { get; set; }
-        //Image
         public byte[] ProfilePic { get; set; }
     }
 }
