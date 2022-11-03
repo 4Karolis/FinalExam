@@ -87,6 +87,7 @@ namespace FinalExam.Controllers
         [Authorize (Roles = "admin")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
+            await _userService.DeleteUserAsync(userId);
             return Ok();
         }
         [HttpGet("GetImageByIdTest")]

@@ -97,5 +97,11 @@ namespace Exam.BL
         {
             return await _dbrepository.GetUserByIdAsync(id);
         }
+        public async Task DeleteUserAsync(int userId)
+        {
+            var userToDelete = await _dbrepository.GetUserByIdAsync(userId);
+            await _dbrepository.DeleteUserAsync(userToDelete);
+            await _dbrepository.SaveChangesAsync();
+        }
     }
 }
