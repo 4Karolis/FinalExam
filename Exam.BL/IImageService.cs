@@ -11,6 +11,6 @@ namespace Exam.BL
     {
         Task<Image> AddImageAsync(byte[] imageBytes,  string contentType);
         Task<Image> GetImageAsync(int id);
-        byte[] ResizeImage(byte[] imageBytes, string contentType);
+        Task<byte[]> ResizeImage(byte[] imageBytes, string contentType);
     }
 }

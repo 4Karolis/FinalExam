@@ -38,7 +38,7 @@ namespace Exam.BL
         {
             return await _dbRepository.GetImageAsync(id);
         }
-        public byte[] ResizeImage(byte[] imageBytes, string contentType)
+        public async Task<byte[]> ResizeImage(byte[] imageBytes, string contentType)
         {
             using var memoryStream = new MemoryStream(imageBytes);
             using var originalBitmapImage = new Bitmap(memoryStream);
