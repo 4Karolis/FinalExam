@@ -1,6 +1,8 @@
-﻿using Exam.DAL;
+﻿using DTOs;
+using Exam.DAL;
 using Exam.Domain;
 using FinalExam.DTOs;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,6 +72,20 @@ namespace Exam.BL
             var imageBytes = memoryStream.ToArray();
             var resizedImage = await ResizeImage(imageBytes, dto.PersonalInfo.ProfilePic.ContentType);
             return resizedImage;
+        }
+        public async Task<byte[]> GetImageBytesForProfilePicChangeAsync(ImageUploadDto imageDto)
+        {
+            using var memoryStream = new MemoryStream();
+            imageDto.ProfilePic.CopyTo(memoryStream);
+            var imageBytes = memoryStream.ToArray();
+            var resizedImage = await ResizeImage(imageBytes, imageDto.ProfilePic.ContentType);
+
+            return resizedImage;
+        }
+        public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
+        {
+            await _dbRepository.ChangeProfilePicAsync(userId, imageBytes, contentType);
+            await _dbRepository.SaveChangesAsync();
         }
     }
 }

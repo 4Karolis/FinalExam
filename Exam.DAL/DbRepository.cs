@@ -108,5 +108,11 @@ namespace Exam.DAL
         {
             _dbContext.Remove(user);            
         }
+        public async Task ChangeProfilePicAsync(int userId, Image profilePic)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            user.PersonalInfo.ProfilePic = profilePic;
+            _dbContext.Attach(user);
+        }
     }
 }
