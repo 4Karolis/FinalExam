@@ -104,9 +104,10 @@ namespace Exam.DAL
             .FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.ResidentialInfo.ApartmentNumber = apartmentNumber;
         }
-        public async Task DeleteUserAsync(User user)
+        public async Task DeleteUserAsync(User user, Image profilePic)
         {
-            _dbContext.Remove(user);
+            _dbContext.Remove(profilePic);
+            _dbContext.Remove(user);            
         }
     }
 }

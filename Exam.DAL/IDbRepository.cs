@@ -26,7 +26,7 @@ namespace Exam.DAL
         Task ChangeStreetAsync(int userId, string street);
         Task ChangeHouseNumberAsync(int userId, string houseNumber);
         Task ChangeApartmentNumber(int userId, string apartmentNumber);
-        Task DeleteUserAsync(User user);
+        Task DeleteUserAsync(User user, Image profilePic);
 
     }
 }
