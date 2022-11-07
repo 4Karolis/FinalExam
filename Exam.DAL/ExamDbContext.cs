@@ -15,5 +15,10 @@ namespace Exam.DAL
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PersonalInfo>().HasOne(p => p.ProfilePic).WithOne(i => i.PersonalInfo).OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

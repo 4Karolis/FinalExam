@@ -44,11 +44,10 @@ namespace FinalExam.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
-            var user = await _userService.GetUserByIdAsync(userId);
-            var profilePicId = user.PersonalInfo.ProfilePic.Id;
-
-            await _userService.DeleteUserAsync(userId, profilePicId);
+            
+            await _userService.DeleteUserAsync(userId);
             return Ok();
         }
+
     }
 }
