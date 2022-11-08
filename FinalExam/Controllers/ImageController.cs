@@ -23,6 +23,14 @@ namespace FinalExam.Controllers
             var image = await _imageService.GetImageAsync(imageId);
             return File(image.ImageBytes, image.ContentType);
         }
+        [HttpGet("ImageByUserId")]
+        [Authorize]
+        public async Task<IActionResult> GetImageByUserIdAsync()
+        {
+            var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
+            var image = await _imageService.GetImageByUserIdAsync(userId);
+            return File(image.ImageBytes, image.ContentType);
+        }
         [HttpPut("ChangeProfilePic")]
         [Authorize]
         public async Task<IActionResult> ChangeProfilePic(ImageUploadDto imageDto)

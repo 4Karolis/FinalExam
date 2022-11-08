@@ -37,6 +37,13 @@ namespace Exam.DAL
         {
             return await _dbContext.Images.FirstOrDefaultAsync(i => i.Id == id);
         }
+        public async Task<Image> GetImageByUserIdAsync(int userId)
+        {
+            var user = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            var personalInfoId = user.PersonalInfo.Id;
+            var image = await _dbContext.Images.FirstOrDefaultAsync(i => i.PersonalInfoId == personalInfoId);
+            return image;
+        }
 
         public async Task<User> GetUserByIdAsync(int id)
         {
@@ -112,9 +119,22 @@ namespace Exam.DAL
         public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
             var user = await _dbContext.Users.Include(u => u.PersonalInfo.ProfilePic).FirstOrDefaultAsync(u => u.Id == userId);
-            user.PersonalInfo.ProfilePic.ImageBytes = imageBytes;
-            user.PersonalInfo.ProfilePic.ContentType = contentType;
-            _dbContext.Update(user);
+            //user.PersonalInfo.ProfilePic.ImageBytes = imageBytes;
+            //user.PersonalInfo.ProfilePic.ContentType = contentType;
+            //_dbContext.Users.Attach(user);
+            //_dbContext.Entry(user).State = EntityState.Modified;
+
+            var profilePic =  await _dbContext.Images.FirstOrDefaultAsync(x => x.Id == user.PersonalInfo.ProfilePic.Id);
+            var pic = user.PersonalInfo.ProfilePic;
+            pic.ImageBytes = imageBytes;
+            pic.ContentType = contentType;
+            _dbContext.Attach(user.PersonalInfo.ProfilePic);
+            _dbContext.Entry(user.PersonalInfo.ProfilePic).State = EntityState.Modified;
+            //profilePic.ImageBytes = imageBytes;
+            //profilePic.ContentType = contentType;
+            //_dbContext.Images.Attach(profilePic);
+            //_dbContext.Entry(profilePic).State = EntityState.Modified;
+            //_dbContext.SaveChangesAsync();
         }
     }
 }
