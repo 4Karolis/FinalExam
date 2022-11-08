@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,6 @@ namespace Exam.DAL
         Task ChangeHouseNumberAsync(int userId, string houseNumber);
         Task ChangeApartmentNumber(int userId, string apartmentNumber);
         Task DeleteUserAsync(User user);
-        Task ChangeProfilePicAsync(int userId, Image profilePic);
+        Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType);
     }
 }

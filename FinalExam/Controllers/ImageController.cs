@@ -23,7 +23,7 @@ namespace FinalExam.Controllers
             var image = await _imageService.GetImageAsync(imageId);
             return File(image.ImageBytes, image.ContentType);
         }
-        [HttpPut]
+        [HttpPut("ChangeProfilePic")]
         [Authorize]
         public async Task<IActionResult> ChangeProfilePic(ImageUploadDto imageDto)
         {
@@ -33,9 +33,10 @@ namespace FinalExam.Controllers
             }
             var userId = int.Parse(User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value);
             var imageBytes = await _imageService.GetImageBytesForProfilePicChangeAsync(imageDto);
+            var contentType = imageDto.ProfilePic.ContentType;
 
 
-            _imageService.ChangeProfilePicAsync(userId, imageBytes, imageDto.ProfilePic.ContentType.ToString());
+            _imageService.ChangeProfilePicAsync(userId, imageBytes, contentType/*imageDto.ProfilePic.ContentType.ToString()*/);
 
             return Ok();
         }

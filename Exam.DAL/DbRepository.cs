@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -108,11 +109,12 @@ namespace Exam.DAL
         {
             _dbContext.Remove(user);            
         }
-        public async Task ChangeProfilePicAsync(int userId, Image profilePic)
+        public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            user.PersonalInfo.ProfilePic = profilePic;
-            _dbContext.Attach(user);
+            var user = await _dbContext.Users.Include(u => u.PersonalInfo.ProfilePic).FirstOrDefaultAsync(u => u.Id == userId);
+            user.PersonalInfo.ProfilePic.ImageBytes = imageBytes;
+            user.PersonalInfo.ProfilePic.ContentType = contentType;
+            _dbContext.Update(user);
         }
     }
 }
