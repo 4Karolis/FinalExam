@@ -44,7 +44,7 @@ namespace FinalExam.Controllers
             var contentType = imageDto.ProfilePic.ContentType;
 
 
-            _imageService.ChangeProfilePicAsync(userId, imageBytes, contentType/*imageDto.ProfilePic.ContentType.ToString()*/);
+            await _imageService.ChangeProfilePicAsync(userId, imageBytes, contentType/*imageDto.ProfilePic.ContentType.ToString()*/);
 
             return Ok();
         }

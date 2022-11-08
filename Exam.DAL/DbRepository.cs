@@ -118,23 +118,34 @@ namespace Exam.DAL
         }
         public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
-            var user = await _dbContext.Users.Include(u => u.PersonalInfo.ProfilePic).FirstOrDefaultAsync(u => u.Id == userId);
+            //var user = await _dbContext.Users.Include(u => u.PersonalInfo.ProfilePic).Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             //user.PersonalInfo.ProfilePic.ImageBytes = imageBytes;
             //user.PersonalInfo.ProfilePic.ContentType = contentType;
             //_dbContext.Users.Attach(user);
+            //_dbContext.Users.Attach(user);
             //_dbContext.Entry(user).State = EntityState.Modified;
 
-            var profilePic =  await _dbContext.Images.FirstOrDefaultAsync(x => x.Id == user.PersonalInfo.ProfilePic.Id);
-            var pic = user.PersonalInfo.ProfilePic;
-            pic.ImageBytes = imageBytes;
-            pic.ContentType = contentType;
-            _dbContext.Attach(user.PersonalInfo.ProfilePic);
-            _dbContext.Entry(user.PersonalInfo.ProfilePic).State = EntityState.Modified;
+            //var profilePic =  await _dbContext.Images.FirstOrDefaultAsync(x => x.Id == user.PersonalInfo.ProfilePic.Id);
+            //var pic = user.PersonalInfo.ProfilePic;
+            //pic.ImageBytes = imageBytes;
+            //pic.ContentType = contentType;
+            //_dbContext.Attach(user.PersonalInfo.ProfilePic);
+            //_dbContext.Entry(user.PersonalInfo.ProfilePic).State = EntityState.Modified;
+
             //profilePic.ImageBytes = imageBytes;
             //profilePic.ContentType = contentType;
             //_dbContext.Images.Attach(profilePic);
             //_dbContext.Entry(profilePic).State = EntityState.Modified;
             //_dbContext.SaveChangesAsync();
+
+            var user = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ProfilePic)
+                .Include(u=> u.PersonalInfo.ResidentialInfo).FirstOrDefaultAsync(u => u.Id == userId);
+            var picture = user.PersonalInfo.ProfilePic;
+            picture.ImageBytes = imageBytes;
+            picture.ContentType = contentType;
+            _dbContext.Images.Update(picture);
+             //_dbContext.SaveChangesAsync();
+
         }
     }
 }
