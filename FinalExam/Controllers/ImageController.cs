@@ -7,7 +7,6 @@ using System.Security.Claims;
 namespace FinalExam.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class ImageController : ControllerBase
     {       
         private readonly IImageService _imageService;        
