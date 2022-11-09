@@ -1,10 +1,7 @@
 ﻿using DTOs;
 using Exam.BL;
-using Exam.Domain;
 using FinalExam.DTOs;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace FinalExam.Controllers
 {
@@ -26,16 +23,8 @@ namespace FinalExam.Controllers
         [HttpPost("Signup")]
         public async Task<IActionResult> Signup(SignupDto signupDto)
         {
-
-            //using var memoryStream = new MemoryStream();
-            //signupDto.PersonalInfo.ProfilePic.CopyTo(memoryStream);
-            //var imageBytes = memoryStream.ToArray();
-            //var resizedImage = await _imageService.ResizeImage(imageBytes, signupDto.PersonalInfo.ProfilePic.ContentType);
             var resizedImage = await _imageService.GetImageBytesAsync(signupDto);
-
             var savedImage = await _imageService.AddImageAsync(resizedImage, signupDto.PersonalInfo.ProfilePic.ContentType);
-            
-
             var success = await _userService.CreateUserAsync(signupDto.Username, signupDto.Password, signupDto.PersonalInfo, signupDto.PersonalInfo.ResidentialInfo, savedImage);
 
             return success ? Ok() : BadRequest(new { ErrorMessage = "User with this username already exists" });

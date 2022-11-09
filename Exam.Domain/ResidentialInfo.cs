@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Exam.Domain
 {
     public class ResidentialInfo
-    {
-       
+    {       
         public int Id { get; set; }
         [ForeignKey("PersonalInfo")]
         public int PersonalInfoId { get; set; }

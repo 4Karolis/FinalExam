@@ -6,12 +6,13 @@ using System.Security.Claims;
 
 namespace FinalExam.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ImageController : ControllerBase
     {       
         private readonly IImageService _imageService;        
 
-        public ImageController(IUsersService usersService, IJwtService jwtService, IImageService imageService,
-            IPersonalInfoService personalInfoService, IResidentialInfoService residentialInfoService)
+        public ImageController(IImageService imageService)
         {            
             _imageService = imageService;
         }
@@ -23,6 +24,7 @@ namespace FinalExam.Controllers
             var image = await _imageService.GetImageAsync(imageId);
             return File(image.ImageBytes, image.ContentType);
         }
+
         [HttpGet("ImageByUserId")]
         [Authorize]
         public async Task<IActionResult> GetImageByUserIdAsync()
@@ -31,6 +33,7 @@ namespace FinalExam.Controllers
             var image = await _imageService.GetImageByUserIdAsync(userId);
             return File(image.ImageBytes, image.ContentType);
         }
+
         [HttpPut("ChangeProfilePic")]
         [Authorize]
         public async Task<IActionResult> ChangeProfilePic(ImageUploadDto imageDto)
@@ -43,8 +46,7 @@ namespace FinalExam.Controllers
             var imageBytes = await _imageService.GetImageBytesForProfilePicChangeAsync(imageDto);
             var contentType = imageDto.ProfilePic.ContentType;
 
-
-            await _imageService.ChangeProfilePicAsync(userId, imageBytes, contentType/*imageDto.ProfilePic.ContentType.ToString()*/);
+            await _imageService.ChangeProfilePicAsync(userId, imageBytes, contentType);
 
             return Ok();
         }

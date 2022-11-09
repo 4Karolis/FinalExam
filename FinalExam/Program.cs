@@ -40,7 +40,6 @@ builder.Services.AddBusinessLogic(builder.Configuration);
 
 builder.Services.AddAuthorizationCore();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

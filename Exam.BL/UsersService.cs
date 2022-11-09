@@ -1,13 +1,8 @@
-﻿using DTOs;
-using Exam.DAL;
+﻿using Exam.DAL;
 using Exam.Domain;
 using FinalExam.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Exam.BL
 {
@@ -40,12 +35,6 @@ namespace Exam.BL
                     Phone = personalInfo.Phone,
                     Email = personalInfo.Email,
                     ProfilePic = image,
-                    //{
-                    //    //        public IFormFile ProfilePic { get; set; }
-                    //    ContentType = imageDto.ProfilePic.ContentType
-                    //    //ImageBytes = imageDto.ProfilePic.
-
-                    //},
                     ResidentialInfo = new ResidentialInfo
                     {
                         City = residentialInfo.City,

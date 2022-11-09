@@ -1,16 +1,9 @@
 ﻿using DTOs;
 using Exam.DAL;
-using Exam.Domain;
 using FinalExam.DTOs;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Image = Exam.Domain.Image;
 
 namespace Exam.BL
@@ -41,6 +34,7 @@ namespace Exam.BL
         {
             return await _dbRepository.GetImageAsync(id);
         }
+
         public async Task<Image> GetImageByUserIdAsync(int userId)
         {
             return await _dbRepository.GetImageByUserIdAsync(userId);

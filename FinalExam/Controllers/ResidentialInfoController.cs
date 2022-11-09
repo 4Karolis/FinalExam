@@ -5,6 +5,8 @@ using System.Security.Claims;
 
 namespace FinalExam.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ResidentialInfoController : ControllerBase
     {
         private readonly IResidentialInfoService _residentialInfoService;

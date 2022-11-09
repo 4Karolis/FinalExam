@@ -6,6 +6,8 @@ using System.Security.Claims;
 
 namespace FinalExam.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IUsersService _userService;
@@ -44,10 +46,8 @@ namespace FinalExam.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
-            
             await _userService.DeleteUserAsync(userId);
             return Ok();
         }
-
     }
 }
