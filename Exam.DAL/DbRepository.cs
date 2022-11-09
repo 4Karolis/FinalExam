@@ -128,7 +128,7 @@ namespace Exam.DAL
         public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
             var user = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ProfilePic)
-                .Include(u=> u.PersonalInfo.ResidentialInfo).FirstOrDefaultAsync(u => u.Id == userId);
+                .FirstOrDefaultAsync(u => u.Id == userId);
             var picture = user.PersonalInfo.ProfilePic;
             picture.ImageBytes = imageBytes;
             picture.ContentType = contentType;
