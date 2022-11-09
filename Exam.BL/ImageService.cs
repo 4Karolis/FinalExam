@@ -11,6 +11,7 @@ namespace Exam.BL
     public class ImageService : IImageService
     {
         private readonly IDbRepository _dbRepository;
+
         public ImageService(IDbRepository dbRepository)
         {
             _dbRepository = dbRepository;
@@ -72,6 +73,7 @@ namespace Exam.BL
             var resizedImage = await ResizeImage(imageBytes, dto.PersonalInfo.ProfilePic.ContentType);
             return resizedImage;
         }
+
         public async Task<byte[]> GetImageBytesForProfilePicChangeAsync(ImageUploadDto imageDto)
         {
             using var memoryStream = new MemoryStream();
@@ -81,6 +83,7 @@ namespace Exam.BL
 
             return resizedImage;
         }
+
         public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
             await _dbRepository.ChangeProfilePicAsync(userId, imageBytes, contentType);

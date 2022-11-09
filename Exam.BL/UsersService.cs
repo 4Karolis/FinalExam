@@ -9,10 +9,12 @@ namespace Exam.BL
     public class UsersService : IUsersService
     {
         private readonly IDbRepository _dbrepository;
+
         public UsersService(IDbRepository dbrepository)
         {
             _dbrepository = dbrepository;
         }
+
         public async Task<bool> CreateUserAsync(string username, string password, PersonalInfoDto personalInfo, ResidentialInfoDto residentialInfo, Image image)
         {
             var existingUser = await _dbrepository.GetUserByUsernameAsync(username);
@@ -49,6 +51,7 @@ namespace Exam.BL
 
             return true;
         }
+
         public async Task<(bool authenticationSuccessful, User? user)> LoginAsync(string username, string password)
         {
             var account = await _dbrepository.GetUserByUsernameAsync(username);

@@ -10,10 +10,12 @@ namespace Exam.BL
     public class JwtService : IJwtService
     {
         private readonly IConfiguration _configuration;
+
         public JwtService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+
         public string GetJwtToken(User user)
         {
             var claims = new List<Claim>

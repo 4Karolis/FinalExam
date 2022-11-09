@@ -6,31 +6,38 @@ namespace Exam.DAL
     public class DbRepository : IDbRepository
     {
         private readonly ExamDbContext _dbContext;
+
         public DbRepository(ExamDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public async Task<User?> GetUserByUsernameAsync(string username)
         {
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Username == username);
         }
+
         public async Task InsertAccountAsync(User user)
         {
             await _dbContext.Users.AddAsync(user);
         }
+
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task<Image> AddImageAsync(Image image)
         {
             await _dbContext.Images.AddAsync(image);
             return image;
         }
+
         public async Task<Image> GetImageAsync(int id)
         {
             return await _dbContext.Images.FirstOrDefaultAsync(i => i.Id == id);
         }
+
         public async Task<Image> GetImageByUserIdAsync(int userId)
         {
             var user = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
@@ -38,6 +45,7 @@ namespace Exam.DAL
             var image = await _dbContext.Images.FirstOrDefaultAsync(i => i.PersonalInfoId == personalInfoId);
             return image;
         }
+
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _dbContext.Users.Include(x => x.PersonalInfo).Include(x => x.PersonalInfo.ProfilePic).Include(x => x.PersonalInfo.ResidentialInfo).
@@ -48,30 +56,36 @@ namespace Exam.DAL
         {
             return await _dbContext.PersonalInfos.FirstOrDefaultAsync(p => p.UserId == userId);
         }
+
         public async Task<ResidentialInfo> GetResidentialInfoAsync(int personalInfoId)
         {
             return await _dbContext.ResidentialInfos.FirstOrDefaultAsync(r => r.PersonalInfoId == personalInfoId);
         }
+
         public async Task ChangeNameAsync(int userId, string name)
         {
             var existingUser = await _dbContext.Users.Include(x => x.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Name = name;          
         }
+
         public async Task ChangeLastnameAsync(int userId, string lastname)
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Lastname = lastname;
         }
+
         public async Task ChangePersonalCodeAsync(int userId, string personalCode)
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.PersonalCode = personalCode;
         }
+
         public async Task ChangePhoneAsync(int userId, string phoneNumber)
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.Phone = phoneNumber;
         }
+
         public async Task ChangeEmailAsync(int userId, string email)
         {
             var existingUser = await _dbContext.Users.Include(u => u.PersonalInfo).FirstOrDefaultAsync(u => u.Id == userId);
@@ -105,10 +119,12 @@ namespace Exam.DAL
             .FirstOrDefaultAsync(u => u.Id == userId);
             existingUser.PersonalInfo.ResidentialInfo.ApartmentNumber = apartmentNumber;
         }
+
         public async Task DeleteUserAsync(User user)
         {
             _dbContext.Remove(user);            
         }
+
         public async Task ChangeProfilePicAsync(int userId, byte[] imageBytes, string contentType)
         {
             var user = await _dbContext.Users.Include(u => u.PersonalInfo).Include(u => u.PersonalInfo.ProfilePic)

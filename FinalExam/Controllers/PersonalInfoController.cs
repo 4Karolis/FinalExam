@@ -81,7 +81,5 @@ namespace FinalExam.Controllers
             await _personalInfoService.ChangeEmailAsync(userId, email);
             return Ok();
         }
-
-        //ADD ChangeProfilePic
     }
 }
