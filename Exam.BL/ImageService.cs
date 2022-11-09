@@ -56,9 +56,6 @@ namespace Exam.BL
             graphics.DrawImage(originalBitmapImage, 0, 0, 200, 200);
 
             using var stream = new MemoryStream();
-            //var imageFormatList = contentType.Split('/');
-            //var imageFormat = imageFormatList[1];
-            //var test = char.ToUpper(imageFormat[0]) + imageFormat.Substring(1);
             resizedImage.Save(stream, ImageFormat.Jpeg);
             imageBytes = stream.ToArray();
 
