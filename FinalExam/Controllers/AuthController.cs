@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalExam.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IUsersService _userService;
